@@ -1,3 +1,7 @@
+# Signal Port featuring Android Messages UI
+
+By Yathavan Parameshwaran
+
 # Signal Android 
 
 Signal is a messaging app for simple private communication with friends.
