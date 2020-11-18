@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:padding="12dp"
-        android:background="@drawable/message_bubble_background">
+        android:background="@color/transparent"> <!-- edited by KingCurry9812 -->
 
         <org.thoughtcrime.securesms.components.TypingIndicatorView
             android:id="@+id/typing_indicator"

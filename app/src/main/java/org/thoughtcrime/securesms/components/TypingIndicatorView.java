@@ -50,7 +50,7 @@ public class TypingIndicatorView extends LinearLayout {
 
     if (attrs != null) {
       TypedArray typedArray = getContext().getTheme().obtainStyledAttributes(attrs, R.styleable.TypingIndicatorView, 0, 0);
-      int        tint       = typedArray.getColor(R.styleable.TypingIndicatorView_typingIndicator_tint, Color.WHITE);
+      int        tint       = typedArray.getColor(R.styleable.TypingIndicatorView_typingIndicator_tint, Color.BLACK); // edited by KingCurry9812
       typedArray.recycle();
 
       dot1.getBackground().setColorFilter(tint, PorterDuff.Mode.MULTIPLY);
