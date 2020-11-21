@@ -114,7 +114,7 @@ android {
     useLibrary 'org.apache.http.legacy'
 
     dexOptions {
-        javaMaxHeapSize "4g"
+        javaMaxHeapSize "2g"
     }
 
     signingConfigs {

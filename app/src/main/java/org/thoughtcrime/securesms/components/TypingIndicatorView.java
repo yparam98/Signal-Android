@@ -1,5 +1,6 @@
 package org.thoughtcrime.securesms.components;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -50,8 +51,10 @@ public class TypingIndicatorView extends LinearLayout {
 
     if (attrs != null) {
       TypedArray typedArray = getContext().getTheme().obtainStyledAttributes(attrs, R.styleable.TypingIndicatorView, 0, 0);
-      int        tint       = typedArray.getColor(R.styleable.TypingIndicatorView_typingIndicator_tint, Color.BLACK); // edited by KingCurry9812
+      int        tint       = typedArray.getColor(R.styleable.TypingIndicatorView_typingIndicator_tint, Color.GREEN); // edited by KingCurry9812
       typedArray.recycle();
+
+      // make typing dots color the color of the conversation
 
       dot1.getBackground().setColorFilter(tint, PorterDuff.Mode.MULTIPLY);
       dot2.getBackground().setColorFilter(tint, PorterDuff.Mode.MULTIPLY);
@@ -83,10 +86,22 @@ public class TypingIndicatorView extends LinearLayout {
     if (timeInCycle < start || timeInCycle > end) {
       renderDefault(dot);
     } else if (timeInCycle < peak) {
-      renderFadeIn(dot, timeInCycle, start);
+      renderBounceUp(dot, timeInCycle, start);
     } else {
-      renderFadeOut(dot, timeInCycle, peak);
+      renderBounceDown(dot, timeInCycle, peak);
     }
+  }
+
+  private void renderBounceUp(View dot, long timeInCycle, long bounceUpStart) { // added by KingCurry9812
+    ObjectAnimator move_up = ObjectAnimator.ofFloat(dot, "translationY", 50f);
+    move_up.setDuration(timeInCycle);
+    move_up.start();
+  }
+
+  private void renderBounceDown(View dot, long timeInCycle, long bounceDownStart) { // added by KingCurry9812
+    ObjectAnimator move_down = ObjectAnimator.ofFloat(dot, "translationY", -50f);
+    move_down.setDuration(timeInCycle);
+    move_down.start();
   }
 
   private void renderDefault(View dot) {

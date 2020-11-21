@@ -9,9 +9,9 @@
 
     <View
         android:id="@+id/typing_dot1"
-        android:layout_width="10dp"
-        android:layout_height="10dp"
-        android:layout_margin="2dp"
+        android:layout_width="5dp"
+        android:layout_height="5dp"
+        android:layout_margin="1dp"
         android:scaleX="0.5"
         android:scaleY="0.5"
         android:alpha="0.5"
@@ -19,9 +19,9 @@
 
     <View
         android:id="@+id/typing_dot2"
-        android:layout_width="10dp"
-        android:layout_height="10dp"
-        android:layout_margin="2dp"
+        android:layout_width="5dp"
+        android:layout_height="5dp"
+        android:layout_margin="1dp"
         android:scaleX="0.5"
         android:scaleY="0.5"
         android:alpha="0.5"
@@ -29,9 +29,9 @@
 
     <View
         android:id="@+id/typing_dot3"
-        android:layout_width="10dp"
-        android:layout_height="10dp"
-        android:layout_margin="2dp"
+        android:layout_width="5dp"
+        android:layout_height="5dp"
+        android:layout_margin="1dp"
         android:scaleX="0.5"
         android:scaleY="0.5"
         android:alpha="0.5"

@@ -20,19 +20,11 @@
         android:contentDescription="@string/conversation_item_received__contact_photo_description"
         app:fallbackImageSize="small" />
 
-    <FrameLayout
-        android:id="@+id/typing_bubble"
+    <org.thoughtcrime.securesms.components.TypingIndicatorView
+        android:id="@+id/typing_indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:padding="12dp"
-        android:background="@color/transparent"> <!-- edited by KingCurry9812 -->
-
-        <org.thoughtcrime.securesms.components.TypingIndicatorView
-            android:id="@+id/typing_indicator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    </FrameLayout>
+        android:padding="12dp"/>
 
 </org.thoughtcrime.securesms.components.ConversationTypingView>
