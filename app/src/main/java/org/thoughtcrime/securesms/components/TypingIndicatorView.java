@@ -2,6 +2,7 @@ package org.thoughtcrime.securesms.components;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import org.thoughtcrime.securesms.R;
 
@@ -57,6 +59,9 @@ public class TypingIndicatorView extends LinearLayout {
   }
 
   private void initialize(@Nullable AttributeSet attrs) {
+    int nightModeFlag = getContext().getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+    int tint = 0;
+
     inflate(getContext(), R.layout.typing_indicator_view, this);
 
     setWillNotDraw(false);
@@ -72,7 +77,16 @@ public class TypingIndicatorView extends LinearLayout {
 
     if (attrs != null) {
       TypedArray typedArray = getContext().getTheme().obtainStyledAttributes(attrs, R.styleable.TypingIndicatorView, 0, 0);
-      int        tint       = typedArray.getColor(R.styleable.TypingIndicatorView_typingIndicator_tint, Color.BLACK); // edited by KingCurry9812
+      switch (nightModeFlag)
+      {
+        case Configuration.UI_MODE_NIGHT_YES:
+          tint = typedArray.getColor(R.styleable.TypingIndicatorView_typingIndicator_tint, Color.WHITE);
+          break;
+        case Configuration.UI_MODE_NIGHT_NO:
+          tint = typedArray.getColor(R.styleable.TypingIndicatorView_typingIndicator_tint, Color.BLACK);
+          break;
+      }
+
       typedArray.recycle();
 
       // make typing dots color the color of the conversation
