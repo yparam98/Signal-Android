@@ -9,21 +9,21 @@
     android:gravity="center_vertical"
     tools:background="#007fff">
 
-    <org.thoughtcrime.securesms.components.AvatarImageView
-        android:id="@+id/contact_photo_image"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
-        android:layout_marginEnd="10dp"
-        android:clickable="true"
-        android:contentDescription="@string/conversation_list_item_view__contact_photo_image"
-        android:cropToPadding="true"
-        android:foreground="@drawable/contact_photo_background"
-        android:transitionName="contact_photo"
-        app:inverted="true"
-        app:fallbackImageSize="small"
-        tools:src="@drawable/ic_contact_picture" />
+<!--    <org.thoughtcrime.securesms.components.AvatarImageView-->
+<!--        android:id="@+id/contact_photo_image"-->
+<!--        android:layout_width="36dp"-->
+<!--        android:layout_height="36dp"-->
+<!--        android:layout_alignParentStart="true"-->
+<!--        android:layout_centerVertical="true"-->
+<!--        android:layout_marginEnd="10dp"-->
+<!--        android:clickable="true"-->
+<!--        android:contentDescription="@string/conversation_list_item_view__contact_photo_image"-->
+<!--        android:cropToPadding="true"-->
+<!--        android:foreground="@drawable/contact_photo_background"-->
+<!--        android:transitionName="contact_photo"-->
+<!--        app:inverted="true"-->
+<!--        app:fallbackImageSize="small"-->
+<!--        tools:src="@drawable/ic_contact_picture" />-->
 
     <LinearLayout
         android:id="@+id/content"
@@ -40,11 +40,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|start"
             android:drawablePadding="3dp"
+            android:drawableTint="@color/transparent_white_90"
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:maxLines="1"
+            android:textSize="18sp"
             android:transitionName="recipient_name"
-            android:drawableTint="@color/transparent_white_90"
             tools:ignore="UnusedAttribute"
             tools:text="J. Jonah Jameson" />
 
