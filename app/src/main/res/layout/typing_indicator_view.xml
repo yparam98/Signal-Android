@@ -9,32 +9,32 @@
 
     <View
         android:id="@+id/typing_dot1"
-        android:layout_width="5dp"
-        android:layout_height="5dp"
-        android:layout_margin="1dp"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:layout_margin="2dp"
         android:scaleX="0.5"
         android:scaleY="0.5"
-        android:alpha="0.5"
+        android:alpha="1"
         android:background="@drawable/circle_white" />
 
     <View
         android:id="@+id/typing_dot2"
-        android:layout_width="5dp"
-        android:layout_height="5dp"
-        android:layout_margin="1dp"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:layout_margin="2dp"
         android:scaleX="0.5"
         android:scaleY="0.5"
-        android:alpha="0.5"
+        android:alpha="1"
         android:background="@drawable/circle_white" />
 
     <View
         android:id="@+id/typing_dot3"
-        android:layout_width="5dp"
-        android:layout_height="5dp"
-        android:layout_margin="1dp"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:layout_margin="2dp"
         android:scaleX="0.5"
         android:scaleY="0.5"
-        android:alpha="0.5"
+        android:alpha="1"
         android:background="@drawable/circle_white" />
 
 </merge>
