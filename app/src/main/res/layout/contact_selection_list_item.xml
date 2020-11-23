@@ -68,7 +68,7 @@
                       android:textAppearance="@style/TextAppearance.Signal.Body2"
                       android:textColor="@color/signal_text_secondary"
                       android:textSize="14sp"
-                      android:fontFamily="sans-serif-light"
+                      android:fontFamily="@font/google"
                       tools:text="@sample/contacts.json/data/number" />
 
             <TextView android:id="@+id/label"
@@ -79,7 +79,7 @@
                       android:singleLine="true"
                       android:textAppearance="@style/TextAppearance.Signal.Body2"
                       android:textColor="@color/signal_text_secondary"
-                      android:fontFamily="sans-serif-light"
+                      android:fontFamily="@font/google"
                       tools:text="@sample/contacts.json/data/label"
                       tools:ignore="RtlSymmetry" />
 

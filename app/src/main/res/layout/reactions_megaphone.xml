@@ -63,7 +63,7 @@
           android:layout_marginEnd="16dp"
           android:layout_marginTop="14dp"
           style="@style/Signal.Text.Body"
-          android:fontFamily="sans-serif-medium"
+          android:fontFamily="@font/google"
           android:text="@string/Megaphones_introducing_reactions"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintEnd_toEndOf="parent"

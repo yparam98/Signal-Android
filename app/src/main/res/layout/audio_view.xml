@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:fontFamily="sans-serif-light"
+            android:fontFamily="@font/google"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/signal_text_secondary"
             android:textSize="@dimen/conversation_item_date_text_size"

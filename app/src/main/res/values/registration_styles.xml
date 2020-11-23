@@ -9,18 +9,21 @@
         <item name="cpb_colorIndicator">@color/white</item>
         <item name="cpb_colorProgress">@color/core_ultramarine</item>
         <item name="cpb_selectorIdle">@drawable/progress_button_state</item>
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="Signal.Text.Headline.Registration">
-        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="Signal.Text.Body.Registration">
         <item name="android:textSize">@dimen/registration_body_text</item>
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="Button.Borderless.Registration">
         <item name="android:textColor">@color/core_grey_60</item>
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
 </resources>

@@ -3,10 +3,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="Theme.Signal.DayNight.NoActionBar" parent="TextSecure.LightNoActionBar">
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="TextSecure.LightNoActionBar" parent="@style/TextSecure.BaseLightNoActionBar">
         <!-- leave empty to allow overriding -->
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="TextSecure.BaseLightNoActionBar" parent="@style/TextSecure.LightTheme">
@@ -18,19 +20,23 @@
         <item name="colorPrimary">@color/core_ultramarine</item>
         <item name="colorPrimaryDark">@color/core_ultramarine</item>
         <item name="colorAccent">@color/core_ultramarine</item>
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="TextSecure.DarkNoActionBar" parent="@style/TextSecure.BaseDarkNoActionBar">
         <!-- leave empty to allow overriding -->
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="TextSecure.BaseMediaPreview" parent="@style/TextSecure.BaseDarkNoActionBar">
         <item name="colorPrimaryDark">@color/media_preview_bar_background</item>
         <item name="android:textColorSecondary">@color/white</item>
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="TextSecure.MediaPreview" parent="@style/TextSecure.BaseMediaPreview">
         <!-- leave empty to allow overriding -->
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="TextSecure.BaseDarkNoActionBar" parent="@style/TextSecure.BaseDarkTheme">
@@ -42,22 +48,27 @@
         <item name="actionBarPopupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
         <item name="colorPrimary">@color/core_grey_95</item>
         <item name="colorAccent">@color/core_ultramarine_light</item>
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="Signal.Light.NoActionBar.Invite" parent="Base.Signal.Light.NoActionBar.Invite">
         <!-- Empty for override -->
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="Base.Signal.Light.NoActionBar.Invite" parent="@style/TextSecure.LightNoActionBar">
         <item name="contact_filter_toolbar_icon_tint">@color/signal_text_toolbar_subtitle</item>
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="Signal.NoActionBar.Invite" parent="Base.Signal.NoActionBar.Invite">
         <!-- Empty for override -->
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="Base.Signal.NoActionBar.Invite" parent="@style/TextSecure.DarkNoActionBar">
         <item name="contact_filter_toolbar_icon_tint">@color/signal_text_toolbar_subtitle</item>
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="TextSecure.LightIntroTheme" parent="@style/Theme.AppCompat.Light">
@@ -68,6 +79,7 @@
 
         <item name="android:textColorHint">#cc000000</item>
         <item name="android:windowBackground">@color/white</item>
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="TextSecure.DarkIntroTheme" parent="@style/Theme.AppCompat">
@@ -78,6 +90,7 @@
 
         <item name="android:textColorHint">@color/white</item>
         <item name="android:windowBackground">@color/core_grey_95</item>
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="TextSecure.LightTheme.Popup" parent="TextSecure.LightTheme">
@@ -90,10 +103,12 @@
         <item name="android:windowAnimationStyle">@style/PopupAnimation</item>
         <item name="android:windowCloseOnTouchOutside">true</item>
         <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="TextSecure.LightTheme" parent="TextSecure.BaseLightTheme">
         <!-- Allows for Overrides -->
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="TextSecure.BaseLightTheme" parent="@style/Theme.MaterialComponents.Light.Bridge">
@@ -143,10 +158,12 @@
         <item name="colorControlNormal">@color/core_grey_90</item>
 
 
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="TextSecure.DarkTheme" parent="@style/TextSecure.BaseDarkTheme">
         <!-- leave empty to allow overriding -->
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="TextSecure.BaseDarkTheme" parent="@style/Theme.MaterialComponents.Bridge">
@@ -194,40 +211,50 @@
         <item name="chipStyle">@style/Signal.Chip.Action</item>
 
         <item name="colorControlNormal">@color/core_white</item>
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="Theme.Signal.AlertDialog.Light.Cornered" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="android:windowBackground">@drawable/dialog_corners</item>
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="Theme.Signal.AlertDialog.Dark.Cornered" parent="Theme.AppCompat.Dialog.Alert">
         <item name="android:windowBackground">@drawable/dialog_corners</item>
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="Theme.Signal.AlertDialog.Light.Cornered.ColoredAccent">
         <item name="colorAccent">@color/core_ultramarine</item>
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="Theme.Signal.AlertDialog.Dark.Cornered.ColoredAccent">
         <item name="colorAccent">@color/core_ultramarine_light</item>
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
 
     <style name="Theme.Signal.Insights.Modal" parent="@style/Theme.AppCompat.Dialog.MinWidth">
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="TextSecure.MediaSendProgressDialog" parent="@android:style/Theme.Dialog">
         <item name="android:background">@color/core_grey_95</item>
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="TextSecure.LightRegistrationTheme" parent="TextSecure.LightNoActionBar">
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="TextSecure.DarkRegistrationTheme" parent="TextSecure.DarkNoActionBar">
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="TextSecure.FullScreenMedia" parent="TextSecure.DarkNoActionBar">
         <item name="android:windowFullscreen">true</item>
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="TextSecure.LightNoActionBar.DarkToolbar" parent="TextSecure.LightNoActionBar">
@@ -236,6 +263,7 @@
         <item name="android:homeAsUpIndicator">@drawable/ic_arrow_left_conversation_24</item>
         <item name="collapseIcon">@drawable/ic_arrow_left_conversation_24</item>
         <item name="android:collapseIcon" tools:ignore="NewApi">@drawable/ic_arrow_left_conversation_24</item>
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="TextSecure.DarkNoActionBar.DarkToolbar" parent="TextSecure.DarkNoActionBar">
@@ -244,6 +272,7 @@
         <item name="android:homeAsUpIndicator">@drawable/ic_arrow_left_conversation_24</item>
         <item name="collapseIcon">@drawable/ic_arrow_left_conversation_24</item>
         <item name="android:collapseIcon" tools:ignore="NewApi">@drawable/ic_arrow_left_conversation_24</item>
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="TextSecure.LightTheme.Conversation">
@@ -254,6 +283,7 @@
         <item name="android:homeAsUpIndicator">@drawable/ic_arrow_left_conversation_24</item>
         <item name="collapseIcon">@drawable/ic_arrow_left_conversation_24</item>
         <item name="android:collapseIcon" tools:ignore="NewApi">@drawable/ic_arrow_left_conversation_24</item>
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="TextSecure.DarkTheme.Conversation">
@@ -264,6 +294,7 @@
         <item name="android:homeAsUpIndicator">@drawable/ic_arrow_left_conversation_24</item>
         <item name="collapseIcon">@drawable/ic_arrow_left_conversation_24</item>
         <item name="android:collapseIcon" tools:ignore="NewApi">@drawable/ic_arrow_left_conversation_24</item>
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="TextSecure.LightTheme.WebRTCCall">
@@ -273,45 +304,55 @@
         <item name="android:windowLightStatusBar" tools:ignore="NewApi">false</item>
         <item name="android:navigationBarColor" tools:ignore="NewApi">@color/core_black</item>
         <item name="android:windowLightNavigationBar" tools:ignore="NewApi">false</item>
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="Theme.Signal.Light.BottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="Theme.Signal.BottomSheetDialog" parent="Theme.Design.BottomSheetDialog">
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="Theme.Signal.Light.BottomSheetDialog.Fixed">
         <item name="android:windowIsFloating">false</item>
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="Theme.Signal.BottomSheetDialog.Fixed" parent="Theme.Design.BottomSheetDialog">
         <item name="android:windowIsFloating">false</item>
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="Theme.Signal.BottomSheetDialog.Fixed.ReactWithAny">
         <item name="bottomSheetStyle">@style/Widget.Signal.BottomSheet.ReactWithAny</item>
         <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="Theme.Signal.Light.BottomSheetDialog.Fixed.ReactWithAny">
         <item name="bottomSheetStyle">@style/Widget.Signal.BottomSheet.ReactWithAny.Light</item>
         <item name="android:backgroundDimEnabled">false</item>
         <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.Signal.BottomSheet.Rounded</item>
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="Signal.DayNight.Dialog.Animated" parent="Signal.DayNight">
         <item name="android:windowAnimationStyle">@style/FadeScale</item>
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="Widget.Signal.BottomSheet.ReactWithAny" parent="Widget.MaterialComponents.BottomSheet">
         <item name="backgroundTint">@color/core_grey_75</item>
         <item name="behavior_peekHeight">@dimen/react_with_any_emoji_bottom_sheet_dialog_fragment_min_height</item>
         <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.Signal.BottomSheet.Rounded</item>
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="Widget.Signal.BottomSheet.ReactWithAny.Light">
         <item name="backgroundTint">@color/white</item>
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="ShapeAppearanceOverlay.Signal.BottomSheet.Rounded" parent="">
@@ -320,15 +361,18 @@
         <item name="cornerSizeTopLeft">8dp</item>
         <item name="cornerSizeBottomLeft">0dp</item>
         <item name="cornerSizeBottomRight">0dp</item>
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="Widget.Signal.BottomSheet.Rounded" parent="Widget.MaterialComponents.BottomSheet">
         <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.Signal.BottomSheet.Rounded</item>
         <item name="backgroundTint">@color/core_grey_75</item>
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="Widget.Signal.BottomSheet.Rounded.Light">
         <item name="backgroundTint">@color/white</item>
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="Theme.Signal.RoundedBottomSheet.Light">
@@ -340,6 +384,7 @@
 
         <item name="android:navigationBarColor" tools:ignore="NewApi">@color/white</item>
         <item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item>
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="Theme.Signal.RoundedBottomSheet" parent="Theme.MaterialComponents.BottomSheetDialog">
@@ -353,6 +398,7 @@
         <item name="android:navigationBarColor" tools:ignore="NewApi">@color/core_grey_75</item>
         <item name="android:windowLightNavigationBar" tools:ignore="NewApi">false</item>
         <item name="android:statusBarColor" tools:ignore="NewApi">@color/transparent</item>
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="Signal.Chip.Action" parent="Widget.MaterialComponents.Chip.Action">
@@ -367,12 +413,14 @@
         <item name="android:textColor">@color/core_white</item>
         <item name="chipBackgroundColor">@color/core_grey_80</item>
         <item name="closeIconTint">@color/core_grey_15</item>
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
     <style name="Signal.Chip.Action.Light">
         <item name="android:textColor">@color/core_grey_90</item>
         <item name="chipBackgroundColor">@color/core_grey_05</item>
         <item name="closeIconTint">@color/core_grey_60</item>
+        <item name="android:fontFamily">@font/google</item>
     </style>
 
 </resources>

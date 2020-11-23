@@ -18,7 +18,7 @@ import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;
 
 import org.thoughtcrime.securesms.R;
-//import org.thoughtcrime.securesms.components.AvatarImageView;
+import org.thoughtcrime.securesms.components.AvatarImageView;
 import org.thoughtcrime.securesms.mms.GlideRequests;
 import org.thoughtcrime.securesms.recipients.LiveRecipient;
 import org.thoughtcrime.securesms.recipients.Recipient;
@@ -27,7 +27,7 @@ import org.thoughtcrime.securesms.util.ViewUtil;
 
 public class ConversationTitleView extends RelativeLayout {
 
-//  private AvatarImageView avatar;
+  private AvatarImageView avatar;
   private TextView        title;
   private TextView        subtitle;
   private ImageView       verified;
@@ -53,7 +53,7 @@ public class ConversationTitleView extends RelativeLayout {
     this.verified                 = findViewById(R.id.verified_indicator);
     this.subtitleContainer        = findViewById(R.id.subtitle_container);
     this.verifiedSubtitle         = findViewById(R.id.verified_subtitle);
-//    this.avatar                   = findViewById(R.id.contact_photo_image);
+    this.avatar                   = findViewById(R.id.contact_photo_image);
     this.expirationBadgeContainer = findViewById(R.id.expiration_badge_container);
     this.expirationBadgeTime      = findViewById(R.id.expiration_badge);
 
@@ -95,7 +95,7 @@ public class ConversationTitleView extends RelativeLayout {
     TextViewCompat.setCompoundDrawableTintList(title, ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.transparent_white_90)));
 
     if (recipient != null) {
-//      this.avatar.setAvatar(glideRequests, recipient, false);
+      this.avatar.setAvatar(glideRequests, recipient, false);
     }
 
     updateVerifiedSubtitleVisibility();

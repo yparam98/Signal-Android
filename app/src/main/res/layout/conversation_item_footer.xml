@@ -64,7 +64,7 @@
         android:layout_marginStart="4dp"
         android:autoLink="none"
         android:ellipsize="end"
-        android:fontFamily="sans-serif-light"
+        android:fontFamily="@font/google"
         android:linksClickable="false"
         android:maxWidth="140dp"
         android:maxLines="1"

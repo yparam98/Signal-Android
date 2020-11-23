@@ -27,7 +27,7 @@
                   android:paddingStart="10dp">
 
         <TextView android:id="@+id/text"
-                  android:fontFamily="sans-serif-light"
+                  android:fontFamily="@font/google"
                   android:textSize="16sp"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
         <TextView android:id="@+id/subtext"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:fontFamily="sans-serif-light"
+                  android:fontFamily="@font/google"
                   android:textSize="12dp"
                   android:visibility="gone"
                   tools:text="From Home"

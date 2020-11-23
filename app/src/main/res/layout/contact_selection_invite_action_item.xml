@@ -7,7 +7,7 @@
     android:layout_height="@dimen/contact_selection_item_height"
     android:drawablePadding="16dp"
     android:ellipsize="marquee"
-    android:fontFamily="sans-serif-medium"
+    android:fontFamily="@font/google"
     android:gravity="center_vertical|start"
     android:labelFor="@id/action_icon"
     android:paddingStart="@dimen/selection_item_header_width"
