@@ -1,4 +1,11 @@
-# Signal Port featuring Android Messages UI
+# Signal Port featuring Google Allo UI
+
+Current modifications:
+
+- typing indicator
+- delivery status indicator
+- application wide font change
+- application icon upgrade
 
 By Yathavan Parameshwaran
 
