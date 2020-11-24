@@ -81,8 +81,8 @@ public final class ConversationListItem extends RelativeLayout
   @SuppressWarnings("unused")
   private final static String TAG = Log.tag(ConversationListItem.class);
 
-  private final static Typeface  BOLD_TYPEFACE  = Typeface.create("sans-serif-medium", Typeface.NORMAL);
-  private final static Typeface  LIGHT_TYPEFACE = Typeface.create("sans-serif", Typeface.NORMAL);
+  private final static Typeface  BOLD_TYPEFACE  = Typeface.create("google", Typeface.NORMAL);
+  private final static Typeface  LIGHT_TYPEFACE = Typeface.create("google", Typeface.NORMAL);
 
   private Set<Long>           selectedThreads;
   private Set<Long>           typingThreads;

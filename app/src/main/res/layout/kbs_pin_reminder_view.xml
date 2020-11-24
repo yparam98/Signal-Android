@@ -15,7 +15,7 @@
         android:gravity="center"
         android:text="@string/KbsReminderDialog__enter_your_signal_pin"
         style="@style/Signal.Text.Body"
-        android:fontFamily="sans-serif-medium"
+        android:fontFamily="@font/google"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

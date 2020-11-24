@@ -48,7 +48,7 @@
             android:layout_marginTop="30dp"
             style="@style/Signal.Text.Body"
             android:text="@string/CameraContacts_no_signal_contacts"
-            android:fontFamily="sans-serif-medium"/>
+            android:fontFamily="@font/google"/>
 
         <TextView
             android:layout_width="wrap_content"

@@ -9,7 +9,7 @@
       android:id="@+id/log_item_text"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:fontFamily="monospace"
+      android:fontFamily="@font/google"
       android:textSize="@dimen/debug_log_text_size"/>
 
 </org.thoughtcrime.securesms.components.ListenableHorizontalScrollView>

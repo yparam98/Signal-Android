@@ -28,7 +28,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:fontFamily="sans-serif-medium"
+            android:fontFamily="@font/google"
             app:layout_constraintEnd_toStartOf="@id/popup_x"
             app:layout_constraintStart_toEndOf="@id/popup_megaphone_image"
             app:layout_constraintTop_toTopOf="@id/popup_megaphone_image"

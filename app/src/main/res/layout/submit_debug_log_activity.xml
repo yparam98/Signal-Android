@@ -28,7 +28,7 @@
       android:gravity="center"
       android:text="@string/SubmitDebugLogActivity_tap_a_line_to_delete_it"
       android:textColor="@color/core_white"
-      android:fontFamily="sans-serif-medium"
+      android:fontFamily="@font/google"
       android:background="@color/core_ultramarine"
       android:visibility="gone"
       app:layout_constraintTop_toTopOf="@id/debug_log_warning_banner"

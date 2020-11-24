@@ -296,19 +296,19 @@ import static org.whispersystems.libsignal.SessionCipher.SESSION_LOCK;
 @Trace
 @SuppressLint("StaticFieldLeak")
 public class ConversationActivity extends PassphraseRequiredActivity
-    implements ConversationFragment.ConversationFragmentListener,
-               AttachmentManager.AttachmentListener,
-               OnKeyboardShownListener,
-               InputPanel.Listener,
-               InputPanel.MediaListener,
-               ComposeText.CursorPositionChangedListener,
-               ConversationSearchBottomBar.EventListener,
-               StickerKeyboardProvider.StickerEventListener,
-               AttachmentKeyboard.Callback,
-               ConversationReactionOverlay.OnReactionSelectedListener,
-               ReactWithAnyEmojiBottomSheetDialogFragment.Callback,
-               SafetyNumberChangeDialog.Callback,
-               ReactionsBottomSheetDialogFragment.Callback
+        implements ConversationFragment.ConversationFragmentListener,
+        AttachmentManager.AttachmentListener,
+        OnKeyboardShownListener,
+        InputPanel.Listener,
+        InputPanel.MediaListener,
+        ComposeText.CursorPositionChangedListener,
+        ConversationSearchBottomBar.EventListener,
+        StickerKeyboardProvider.StickerEventListener,
+        AttachmentKeyboard.Callback,
+        ConversationReactionOverlay.OnReactionSelectedListener,
+        ReactWithAnyEmojiBottomSheetDialogFragment.Callback,
+        SafetyNumberChangeDialog.Callback,
+        ReactionsBottomSheetDialogFragment.Callback
 {
 
   private static final int SHORTCUT_ICON_SIZE = Build.VERSION.SDK_INT >= 26 ? ViewUtil.dpToPx(72) : ViewUtil.dpToPx(48 + 16 * 2);
@@ -491,7 +491,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
   protected void onNewIntent(Intent intent) {
     super.onNewIntent(intent);
     Log.i(TAG, "onNewIntent()");
-    
+
     if (isFinishing()) {
       Log.w(TAG, "Activity is finishing...");
       return;
@@ -553,9 +553,9 @@ public class ConversationActivity extends PassphraseRequiredActivity
       GroupId.V2 groupId = recipientSnapshot.getGroupId().get().requireV2();
 
       ApplicationDependencies.getJobManager()
-                             .startChain(new RequestGroupV2InfoJob(groupId))
-                             .then(new GroupV2UpdateSelfProfileKeyJob(groupId))
-                             .enqueue();
+              .startChain(new RequestGroupV2InfoJob(groupId))
+              .then(new GroupV2UpdateSelfProfileKeyJob(groupId))
+              .enqueue();
     }
 
     ApplicationDependencies.getMessageNotifier().setVisibleThread(threadId);
@@ -612,120 +612,120 @@ public class ConversationActivity extends PassphraseRequiredActivity
     super.onActivityResult(reqCode, resultCode, data);
 
     if ((data == null && reqCode != TAKE_PHOTO && reqCode != SMS_DEFAULT) ||
-        (resultCode != RESULT_OK && reqCode != SMS_DEFAULT))
+            (resultCode != RESULT_OK && reqCode != SMS_DEFAULT))
     {
       updateLinkPreviewState();
       return;
     }
 
     switch (reqCode) {
-    case PICK_DOCUMENT:
-      setMedia(data.getData(), MediaType.DOCUMENT);
-      break;
-    case PICK_AUDIO:
-      setMedia(data.getData(), MediaType.AUDIO);
-      break;
-    case PICK_CONTACT:
-      if (isSecureText && !isSmsForced()) {
-        openContactShareEditor(data.getData());
-      } else {
-        addAttachmentContactInfo(data.getData());
-      }
-      break;
-    case GET_CONTACT_DETAILS:
-      sendSharedContact(data.getParcelableArrayListExtra(ContactShareEditActivity.KEY_CONTACTS));
-      break;
-    case GROUP_EDIT:
-      Recipient recipientSnapshot = recipient.get();
-
-      onRecipientChanged(recipientSnapshot);
-      titleView.setTitle(glideRequests, recipientSnapshot);
-      NotificationChannels.updateContactChannelName(this, recipientSnapshot);
-      setBlockedUserState(recipientSnapshot, isSecureText, isDefaultSms);
-      supportInvalidateOptionsMenu();
-      break;
-    case TAKE_PHOTO:
-      handleImageFromDeviceCameraApp();
-      break;
-    case ADD_CONTACT:
-      SimpleTask.run(() -> {
-        try {
-          DirectoryHelper.refreshDirectoryFor(this, recipient.get(), false);
-        } catch (IOException e) {
-          Log.w(TAG, "Failed to refresh user after adding to contacts.");
-        }
-        return null;
-      }, nothing -> onRecipientChanged(recipient.get()));
-      break;
-    case PICK_LOCATION:
-      SignalPlace place = new SignalPlace(PlacePickerActivity.addressFromData(data));
-      attachmentManager.setLocation(place, getCurrentMediaConstraints());
-      break;
-    case PICK_GIF:
-      setMedia(data.getData(),
-               MediaType.GIF,
-               data.getIntExtra(GiphyActivity.EXTRA_WIDTH, 0),
-               data.getIntExtra(GiphyActivity.EXTRA_HEIGHT, 0),
-               data.getBooleanExtra(GiphyActivity.EXTRA_BORDERLESS, false));
-      break;
-    case SMS_DEFAULT:
-      initializeSecurity(isSecureText, isDefaultSms);
-      break;
-    case MEDIA_SENDER:
-      MediaSendActivityResult result = data.getParcelableExtra(MediaSendActivity.EXTRA_RESULT);
-      sendButton.setTransport(result.getTransport());
-
-      if (result.isPushPreUpload()) {
-        sendMediaMessage(result);
-        return;
-      }
-
-      long       expiresIn      = recipient.get().getExpireMessages() * 1000L;
-      int        subscriptionId = sendButton.getSelectedTransport().getSimSubscriptionId().or(-1);
-      boolean    initiating     = threadId == -1;
-      QuoteModel quote          = result.isViewOnce() ? null : inputPanel.getQuote().orNull();
-      SlideDeck  slideDeck      = new SlideDeck();
-      List<Mention> mentions    = new ArrayList<>(result.getMentions());
-
-      for (Media mediaItem : result.getNonUploadedMedia()) {
-        if (MediaUtil.isVideoType(mediaItem.getMimeType())) {
-          slideDeck.addSlide(new VideoSlide(this, mediaItem.getUri(), mediaItem.getSize(), mediaItem.getWidth(), mediaItem.getHeight(), mediaItem.getCaption().orNull(), mediaItem.getTransformProperties().orNull()));
-        } else if (MediaUtil.isGif(mediaItem.getMimeType())) {
-          slideDeck.addSlide(new GifSlide(this, mediaItem.getUri(), mediaItem.getSize(), mediaItem.getWidth(), mediaItem.getHeight(), mediaItem.isBorderless(), mediaItem.getCaption().orNull()));
-        } else if (MediaUtil.isImageType(mediaItem.getMimeType())) {
-          slideDeck.addSlide(new ImageSlide(this, mediaItem.getUri(), mediaItem.getMimeType(), mediaItem.getSize(), mediaItem.getWidth(), mediaItem.getHeight(), mediaItem.isBorderless(), mediaItem.getCaption().orNull(), null));
+      case PICK_DOCUMENT:
+        setMedia(data.getData(), MediaType.DOCUMENT);
+        break;
+      case PICK_AUDIO:
+        setMedia(data.getData(), MediaType.AUDIO);
+        break;
+      case PICK_CONTACT:
+        if (isSecureText && !isSmsForced()) {
+          openContactShareEditor(data.getData());
         } else {
-          Log.w(TAG, "Asked to send an unexpected mimeType: '" + mediaItem.getMimeType() + "'. Skipping.");
+          addAttachmentContactInfo(data.getData());
         }
-      }
+        break;
+      case GET_CONTACT_DETAILS:
+        sendSharedContact(data.getParcelableArrayListExtra(ContactShareEditActivity.KEY_CONTACTS));
+        break;
+      case GROUP_EDIT:
+        Recipient recipientSnapshot = recipient.get();
 
-      final Context context = ConversationActivity.this.getApplicationContext();
+        onRecipientChanged(recipientSnapshot);
+        titleView.setTitle(glideRequests, recipientSnapshot);
+        NotificationChannels.updateContactChannelName(this, recipientSnapshot);
+        setBlockedUserState(recipientSnapshot, isSecureText, isDefaultSms);
+        supportInvalidateOptionsMenu();
+        break;
+      case TAKE_PHOTO:
+        handleImageFromDeviceCameraApp();
+        break;
+      case ADD_CONTACT:
+        SimpleTask.run(() -> {
+          try {
+            DirectoryHelper.refreshDirectoryFor(this, recipient.get(), false);
+          } catch (IOException e) {
+            Log.w(TAG, "Failed to refresh user after adding to contacts.");
+          }
+          return null;
+        }, nothing -> onRecipientChanged(recipient.get()));
+        break;
+      case PICK_LOCATION:
+        SignalPlace place = new SignalPlace(PlacePickerActivity.addressFromData(data));
+        attachmentManager.setLocation(place, getCurrentMediaConstraints());
+        break;
+      case PICK_GIF:
+        setMedia(data.getData(),
+                MediaType.GIF,
+                data.getIntExtra(GiphyActivity.EXTRA_WIDTH, 0),
+                data.getIntExtra(GiphyActivity.EXTRA_HEIGHT, 0),
+                data.getBooleanExtra(GiphyActivity.EXTRA_BORDERLESS, false));
+        break;
+      case SMS_DEFAULT:
+        initializeSecurity(isSecureText, isDefaultSms);
+        break;
+      case MEDIA_SENDER:
+        MediaSendActivityResult result = data.getParcelableExtra(MediaSendActivity.EXTRA_RESULT);
+        sendButton.setTransport(result.getTransport());
 
-      sendMediaMessage(result.getTransport().isSms(),
-                       result.getBody(),
-                       slideDeck,
-                       quote,
-                       Collections.emptyList(),
-                       Collections.emptyList(),
-                       mentions,
-                       expiresIn,
-                       result.isViewOnce(),
-                       subscriptionId,
-                       initiating,
-                       true).addListener(new AssertedSuccessListener<Void>() {
-        @Override
-        public void onSuccess(Void result) {
-          AsyncTask.THREAD_POOL_EXECUTOR.execute(() -> {
-            Stream.of(slideDeck.getSlides())
-                  .map(Slide::getUri)
-                  .withoutNulls()
-                  .filter(BlobProvider::isAuthority)
-                  .forEach(uri -> BlobProvider.getInstance().delete(context, uri));
-          });
+        if (result.isPushPreUpload()) {
+          sendMediaMessage(result);
+          return;
         }
-      });
 
-      break;
+        long       expiresIn      = recipient.get().getExpireMessages() * 1000L;
+        int        subscriptionId = sendButton.getSelectedTransport().getSimSubscriptionId().or(-1);
+        boolean    initiating     = threadId == -1;
+        QuoteModel quote          = result.isViewOnce() ? null : inputPanel.getQuote().orNull();
+        SlideDeck  slideDeck      = new SlideDeck();
+        List<Mention> mentions    = new ArrayList<>(result.getMentions());
+
+        for (Media mediaItem : result.getNonUploadedMedia()) {
+          if (MediaUtil.isVideoType(mediaItem.getMimeType())) {
+            slideDeck.addSlide(new VideoSlide(this, mediaItem.getUri(), mediaItem.getSize(), mediaItem.getWidth(), mediaItem.getHeight(), mediaItem.getCaption().orNull(), mediaItem.getTransformProperties().orNull()));
+          } else if (MediaUtil.isGif(mediaItem.getMimeType())) {
+            slideDeck.addSlide(new GifSlide(this, mediaItem.getUri(), mediaItem.getSize(), mediaItem.getWidth(), mediaItem.getHeight(), mediaItem.isBorderless(), mediaItem.getCaption().orNull()));
+          } else if (MediaUtil.isImageType(mediaItem.getMimeType())) {
+            slideDeck.addSlide(new ImageSlide(this, mediaItem.getUri(), mediaItem.getMimeType(), mediaItem.getSize(), mediaItem.getWidth(), mediaItem.getHeight(), mediaItem.isBorderless(), mediaItem.getCaption().orNull(), null));
+          } else {
+            Log.w(TAG, "Asked to send an unexpected mimeType: '" + mediaItem.getMimeType() + "'. Skipping.");
+          }
+        }
+
+        final Context context = ConversationActivity.this.getApplicationContext();
+
+        sendMediaMessage(result.getTransport().isSms(),
+                result.getBody(),
+                slideDeck,
+                quote,
+                Collections.emptyList(),
+                Collections.emptyList(),
+                mentions,
+                expiresIn,
+                result.isViewOnce(),
+                subscriptionId,
+                initiating,
+                true).addListener(new AssertedSuccessListener<Void>() {
+          @Override
+          public void onSuccess(Void result) {
+            AsyncTask.THREAD_POOL_EXECUTOR.execute(() -> {
+              Stream.of(slideDeck.getSlides())
+                      .map(Slide::getUri)
+                      .withoutNulls()
+                      .filter(BlobProvider::isAuthority)
+                      .forEach(uri -> BlobProvider.getInstance().delete(context, uri));
+            });
+          }
+        });
+
+        break;
     }
   }
 
@@ -751,9 +751,9 @@ public class ConversationActivity extends PassphraseRequiredActivity
 
     try {
       Uri mediaUri = BlobProvider.getInstance()
-                                 .forData(getContentResolver().openInputStream(attachmentManager.getCaptureUri()), 0L)
-                                 .withMimeType(MediaUtil.IMAGE_JPEG)
-                                 .createForSingleSessionOnDisk(this);
+              .forData(getContentResolver().openInputStream(attachmentManager.getCaptureUri()), 0L)
+              .withMimeType(MediaUtil.IMAGE_JPEG)
+              .createForSingleSessionOnDisk(this);
 
       getContentResolver().delete(attachmentManager.getCaptureUri(), null, null);
 
@@ -944,26 +944,26 @@ public class ConversationActivity extends PassphraseRequiredActivity
   public boolean onOptionsItemSelected(MenuItem item) {
     super.onOptionsItemSelected(item);
     switch (item.getItemId()) {
-    case R.id.menu_call_secure:               handleDial(getRecipient(), true);                  return true;
-    case R.id.menu_video_secure:              handleVideo(getRecipient());                       return true;
-    case R.id.menu_call_insecure:             handleDial(getRecipient(), false);                 return true;
-    case R.id.menu_view_media:                handleViewMedia();                                 return true;
-    case R.id.menu_add_shortcut:              handleAddShortcut();                               return true;
-    case R.id.menu_search:                    handleSearch();                                    return true;
-    case R.id.menu_add_to_contacts:           handleAddToContacts();                             return true;
-    case R.id.menu_reset_secure_session:      handleResetSecureSession();                        return true;
-    case R.id.menu_group_recipients:          handleDisplayGroupRecipients();                    return true;
-    case R.id.menu_distribution_broadcast:    handleDistributionBroadcastEnabled(item);          return true;
-    case R.id.menu_distribution_conversation: handleDistributionConversationEnabled(item);       return true;
-    case R.id.menu_group_settings:            handleManageGroup();                               return true;
-    case R.id.menu_leave:                     handleLeavePushGroup();                            return true;
-    case R.id.menu_invite:                    handleInviteLink();                                return true;
-    case R.id.menu_mute_notifications:        handleMuteNotifications();                         return true;
-    case R.id.menu_unmute_notifications:      handleUnmuteNotifications();                       return true;
-    case R.id.menu_conversation_settings:     handleConversationSettings();                      return true;
-    case R.id.menu_expiring_messages_off:
-    case R.id.menu_expiring_messages:         handleSelectMessageExpiration();                   return true;
-    case android.R.id.home:                   onNavigateUp();                                    return true;
+      case R.id.menu_call_secure:               handleDial(getRecipient(), true);                  return true;
+      case R.id.menu_video_secure:              handleVideo(getRecipient());                       return true;
+      case R.id.menu_call_insecure:             handleDial(getRecipient(), false);                 return true;
+      case R.id.menu_view_media:                handleViewMedia();                                 return true;
+      case R.id.menu_add_shortcut:              handleAddShortcut();                               return true;
+      case R.id.menu_search:                    handleSearch();                                    return true;
+      case R.id.menu_add_to_contacts:           handleAddToContacts();                             return true;
+      case R.id.menu_reset_secure_session:      handleResetSecureSession();                        return true;
+      case R.id.menu_group_recipients:          handleDisplayGroupRecipients();                    return true;
+      case R.id.menu_distribution_broadcast:    handleDistributionBroadcastEnabled(item);          return true;
+      case R.id.menu_distribution_conversation: handleDistributionConversationEnabled(item);       return true;
+      case R.id.menu_group_settings:            handleManageGroup();                               return true;
+      case R.id.menu_leave:                     handleLeavePushGroup();                            return true;
+      case R.id.menu_invite:                    handleInviteLink();                                return true;
+      case R.id.menu_mute_notifications:        handleMuteNotifications();                         return true;
+      case R.id.menu_unmute_notifications:      handleUnmuteNotifications();                       return true;
+      case R.id.menu_conversation_settings:     handleConversationSettings();                      return true;
+      case R.id.menu_expiring_messages_off:
+      case R.id.menu_expiring_messages:         handleSelectMessageExpiration();                   return true;
+      case android.R.id.home:                   onNavigateUp();                                    return true;
     }
 
     return false;
@@ -1051,10 +1051,10 @@ public class ConversationActivity extends PassphraseRequiredActivity
   @Override
   public void onAttachmentPermissionsRequested() {
     Permissions.with(this)
-               .request(Manifest.permission.READ_EXTERNAL_STORAGE)
-               .onAllGranted(() -> viewModel.onAttachmentKeyboardOpen())
-               .withPermanentDenialDialog(getString(R.string.AttachmentManager_signal_requires_the_external_storage_permission_in_order_to_attach_photos_videos_or_audio))
-               .execute();
+            .request(Manifest.permission.READ_EXTERNAL_STORAGE)
+            .onAllGranted(() -> viewModel.onAttachmentKeyboardOpen())
+            .withPermanentDenialDialog(getString(R.string.AttachmentManager_signal_requires_the_external_storage_permission_in_order_to_attach_photos_videos_or_audio))
+            .execute();
   }
 
 //////// Event Handlers
@@ -1067,32 +1067,32 @@ public class ConversationActivity extends PassphraseRequiredActivity
     }
 
     ExpirationDialog.show(this, recipient.get().getExpireMessages(),
-      expirationTime ->
-        SimpleTask.run(
-          getLifecycle(),
-          () -> {
-            if (activeGroup) {
-              try {
-                GroupManager.updateGroupTimer(ConversationActivity.this, getRecipient().requireGroupId().requirePush(), expirationTime);
-                } catch (GroupChangeException | IOException e) {
-                Log.w(TAG, e);
-                return GroupChangeResult.failure(GroupChangeFailureReason.fromException(e));
-              }
-            } else {
-              DatabaseFactory.getRecipientDatabase(ConversationActivity.this).setExpireMessages(recipient.getId(), expirationTime);
-              OutgoingExpirationUpdateMessage outgoingMessage = new OutgoingExpirationUpdateMessage(getRecipient(), System.currentTimeMillis(), expirationTime * 1000L);
-              MessageSender.send(ConversationActivity.this, outgoingMessage, threadId, false, null);
-            }
-            return GroupChangeResult.SUCCESS;
-          },
-          (changeResult) -> {
-            if (!changeResult.isSuccess()) {
-              Toast.makeText(ConversationActivity.this, GroupErrors.getUserDisplayMessage(changeResult.getFailureReason()), Toast.LENGTH_SHORT).show();
-            } else {
-              invalidateOptionsMenu();
-              if (fragment != null) fragment.setLastSeen(0);
-            }
-          })
+            expirationTime ->
+                    SimpleTask.run(
+                            getLifecycle(),
+                            () -> {
+                              if (activeGroup) {
+                                try {
+                                  GroupManager.updateGroupTimer(ConversationActivity.this, getRecipient().requireGroupId().requirePush(), expirationTime);
+                                } catch (GroupChangeException | IOException e) {
+                                  Log.w(TAG, e);
+                                  return GroupChangeResult.failure(GroupChangeFailureReason.fromException(e));
+                                }
+                              } else {
+                                DatabaseFactory.getRecipientDatabase(ConversationActivity.this).setExpireMessages(recipient.getId(), expirationTime);
+                                OutgoingExpirationUpdateMessage outgoingMessage = new OutgoingExpirationUpdateMessage(getRecipient(), System.currentTimeMillis(), expirationTime * 1000L);
+                                MessageSender.send(ConversationActivity.this, outgoingMessage, threadId, false, null);
+                              }
+                              return GroupChangeResult.SUCCESS;
+                            },
+                            (changeResult) -> {
+                              if (!changeResult.isSuccess()) {
+                                Toast.makeText(ConversationActivity.this, GroupErrors.getUserDisplayMessage(changeResult.getFailureReason()), Toast.LENGTH_SHORT).show();
+                              } else {
+                                invalidateOptionsMenu();
+                                if (fragment != null) fragment.setLastSeen(0);
+                              }
+                            })
     );
   }
 
@@ -1102,7 +1102,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
         @Override
         protected Void doInBackground(Void... params) {
           DatabaseFactory.getRecipientDatabase(ConversationActivity.this)
-                         .setMuted(recipient.getId(), until);
+                  .setMuted(recipient.getId(), until);
 
           return null;
         }
@@ -1127,7 +1127,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
       @Override
       protected Void doInBackground(Void... params) {
         DatabaseFactory.getRecipientDatabase(ConversationActivity.this)
-                       .setMuted(recipient.getId(), 0);
+                .setMuted(recipient.getId(), 0);
 
         return null;
       }
@@ -1176,7 +1176,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
         final Context context = getApplicationContext();
 
         OutgoingEndSessionMessage endSessionMessage =
-            new OutgoingEndSessionMessage(new OutgoingTextMessage(getRecipient(), "TERMINATE", 0, -1));
+                new OutgoingEndSessionMessage(new OutgoingTextMessage(getRecipient(), "TERMINATE", 0, -1));
 
         new AsyncTask<OutgoingEndSessionMessage, Void, Long>() {
           @Override
@@ -1219,13 +1219,13 @@ public class ConversationActivity extends PassphraseRequiredActivity
                 Log.w(TAG, "Utilizing fallback photo for shortcut for recipient " + recipient.getId());
 
                 SimpleTask.run(() -> DrawableUtil.toBitmap(errorDrawable, SHORTCUT_ICON_SIZE, SHORTCUT_ICON_SIZE),
-                               bitmap -> addIconToHomeScreen(context, bitmap, recipient));
+                        bitmap -> addIconToHomeScreen(context, bitmap, recipient));
               }
 
               @Override
               public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
                 SimpleTask.run(() -> BitmapUtil.createScaledBitmap(resource, SHORTCUT_ICON_SIZE, SHORTCUT_ICON_SIZE),
-                               bitmap -> addIconToHomeScreen(context, bitmap, recipient));
+                        bitmap -> addIconToHomeScreen(context, bitmap, recipient));
               }
 
               @Override
@@ -1241,13 +1241,13 @@ public class ConversationActivity extends PassphraseRequiredActivity
   {
     IconCompat icon = IconCompat.createWithAdaptiveBitmap(bitmap);
     String     name = recipient.isSelf() ? context.getString(R.string.note_to_self)
-                                                  : recipient.getDisplayName(context);
+            : recipient.getDisplayName(context);
 
     ShortcutInfoCompat shortcutInfoCompat = new ShortcutInfoCompat.Builder(context, recipient.getId().serialize() + '-' + System.currentTimeMillis())
-                                                                  .setShortLabel(name)
-                                                                  .setIcon(icon)
-                                                                  .setIntent(ShortcutLauncherActivity.createIntent(context, recipient.getId()))
-                                                                  .build();
+            .setShortLabel(name)
+            .setIcon(icon)
+            .setIntent(ShortcutLauncherActivity.createIntent(context, recipient.getId()))
+            .build();
 
     if (ShortcutManagerCompat.requestPinShortcut(context, shortcutInfoCompat, null)) {
       Toast.makeText(context, context.getString(R.string.ConversationActivity_added_to_home_screen), Toast.LENGTH_LONG).show();
@@ -1263,7 +1263,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
   private void handleLeavePushGroup() {
     if (getRecipient() == null) {
       Toast.makeText(this, getString(R.string.ConversationActivity_invalid_recipient),
-                     Toast.LENGTH_LONG).show();
+              Toast.LENGTH_LONG).show();
       return;
     }
 
@@ -1272,8 +1272,8 @@ public class ConversationActivity extends PassphraseRequiredActivity
 
   private void handleManageGroup() {
     startActivityForResult(ManageGroupActivity.newIntent(ConversationActivity.this, recipient.get().requireGroupId()),
-                           GROUP_EDIT,
-                           ManageGroupActivity.createTransitionBundle(this, titleView.findViewById(R.id.contact_photo_image)));
+            GROUP_EDIT,
+            ManageGroupActivity.createTransitionBundle(this, titleView.findViewById(R.id.contact_photo_image)));
   }
 
   private void handleDistributionBroadcastEnabled(MenuItem item) {
@@ -1285,7 +1285,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
         @Override
         protected Void doInBackground(Void... params) {
           DatabaseFactory.getThreadDatabase(ConversationActivity.this)
-                         .setDistributionType(threadId, ThreadDatabase.DistributionTypes.BROADCAST);
+                  .setDistributionType(threadId, ThreadDatabase.DistributionTypes.BROADCAST);
           return null;
         }
       }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -1301,7 +1301,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
         @Override
         protected Void doInBackground(Void... params) {
           DatabaseFactory.getThreadDatabase(ConversationActivity.this)
-                         .setDistributionType(threadId, ThreadDatabase.DistributionTypes.CONVERSATION);
+                  .setDistributionType(threadId, ThreadDatabase.DistributionTypes.CONVERSATION);
           return null;
         }
       }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -1451,8 +1451,8 @@ public class ConversationActivity extends PassphraseRequiredActivity
 
     if (draftMedia != null && draftContentType != null && borderless) {
       SimpleTask.run(getLifecycle(),
-                     () -> getKeyboardImageDetails(draftMedia),
-                     details -> sendKeyboardImage(draftMedia, draftContentType, details));
+              () -> getKeyboardImageDetails(draftMedia),
+              details -> sendKeyboardImage(draftMedia, draftContentType, details));
       return new SettableFuture<>(false);
     }
 
@@ -1548,14 +1548,14 @@ public class ConversationActivity extends PassphraseRequiredActivity
 
   private void initializePendingRequestsBanner() {
     groupViewModel.getActionableRequestingMembers()
-                  .observe(this, actionablePendingGroupRequests -> updateReminders());
+            .observe(this, actionablePendingGroupRequests -> updateReminders());
   }
 
   private void initializeGroupV1MigrationsBanners() {
     groupViewModel.getGroupV1MigrationSuggestions()
-                  .observe(this, s -> updateReminders());
+            .observe(this, s -> updateReminders());
     groupViewModel.getShowGroupsV1MigrationBanner()
-                  .observe(this, b -> updateReminders());
+            .observe(this, b -> updateReminders());
   }
 
 
@@ -1683,7 +1683,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
 
         Log.i(TAG, "Returning registered state...");
         return new boolean[] {registeredState == RegisteredState.REGISTERED && signalEnabled,
-                              Util.isDefaultSmsProvider(context)};
+                Util.isDefaultSmsProvider(context)};
       }
 
       @Override
@@ -1726,10 +1726,10 @@ public class ConversationActivity extends PassphraseRequiredActivity
       ApplicationDependencies.getJobManager().add(new ServiceOutageDetectionJob());
       reminderView.get().showReminder(new ServiceOutageReminder(this));
     } else if (TextSecurePreferences.isPushRegistered(this)      &&
-               TextSecurePreferences.isShowInviteReminders(this) &&
-               !isSecureText                                     &&
-               inviteReminder.isPresent()                        &&
-               !recipient.get().isGroup()) {
+            TextSecurePreferences.isShowInviteReminders(this) &&
+            !isSecureText                                     &&
+            inviteReminder.isPresent()                        &&
+            !recipient.get().isGroup()) {
       reminderView.get().setOnActionClickListener(this::handleReminderAction);
       reminderView.get().setOnDismissListener(() -> inviteReminderModel.dismissReminder());
       reminderView.get().showReminder(inviteReminder.get());
@@ -1808,7 +1808,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
 
         if (params[0].isGroup()) {
           recipients = DatabaseFactory.getGroupDatabase(ConversationActivity.this)
-                                      .getGroupMembers(params[0].requireGroupId(), GroupDatabase.MemberSet.FULL_MEMBERS_EXCLUDING_SELF);
+                  .getGroupMembers(params[0].requireGroupId(), GroupDatabase.MemberSet.FULL_MEMBERS_EXCLUDING_SELF);
         } else {
           recipients = Collections.singletonList(params[0]);
         }
@@ -1835,8 +1835,8 @@ public class ConversationActivity extends PassphraseRequiredActivity
         if (result.second() != null) {
           Log.d(TAG, "Replacing banner...");
           unverifiedBannerView.get().display(result.second(), result.first().getUnverifiedRecords(),
-                                             new UnverifiedClickedListener(),
-                                             new UnverifiedDismissedListener());
+                  new UnverifiedClickedListener(),
+                  new UnverifiedDismissedListener());
         } else if (unverifiedBannerView.resolved()) {
           Log.d(TAG, "Clearing banner...");
           unverifiedBannerView.get().hide();
@@ -2001,7 +2001,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
     StickerSearchRepository repository = new StickerSearchRepository(this);
 
     stickerViewModel = ViewModelProviders.of(this, new ConversationStickerViewModel.Factory(getApplication(), repository))
-                                         .get(ConversationStickerViewModel.class);
+            .get(ConversationStickerViewModel.class);
 
     stickerViewModel.getStickerResults().observe(this, stickers -> {
       if (stickers == null) return;
@@ -2064,12 +2064,12 @@ public class ConversationActivity extends PassphraseRequiredActivity
       }
 
       Set<String> validRecipientIds = Stream.of(getRecipient().getParticipants())
-                                            .map(r -> MentionAnnotation.idToMentionAnnotationValue(r.getId()))
-                                            .collect(Collectors.toSet());
+              .map(r -> MentionAnnotation.idToMentionAnnotationValue(r.getId()))
+              .collect(Collectors.toSet());
 
       return Stream.of(annotations)
-                   .filterNot(a -> validRecipientIds.contains(a.getValue()))
-                   .toList();
+              .filterNot(a -> validRecipientIds.contains(a.getValue()))
+              .toList();
     });
 
     mentionsViewModel.getSelectedRecipient().observe(this, recipient -> {
@@ -2082,14 +2082,14 @@ public class ConversationActivity extends PassphraseRequiredActivity
     inputPanel.setMediaKeyboardToggleMode(true);
 
     TooltipPopup.forTarget(inputPanel.getMediaKeyboardToggleAnchorView())
-                .setBackgroundTint(getResources().getColor(R.color.core_ultramarine))
-                .setTextColor(getResources().getColor(R.color.core_white))
-                .setText(R.string.ConversationActivity_new_say_it_with_stickers)
-                .setOnDismissListener(() -> {
-                  TextSecurePreferences.setHasSeenStickerIntroTooltip(this, true);
-                  EventBus.getDefault().removeStickyEvent(StickerPackInstallEvent.class);
-                })
-                .show(TooltipPopup.POSITION_ABOVE);
+            .setBackgroundTint(getResources().getColor(R.color.core_ultramarine))
+            .setTextColor(getResources().getColor(R.color.core_white))
+            .setText(R.string.ConversationActivity_new_say_it_with_stickers)
+            .setOnDismissListener(() -> {
+              TextSecurePreferences.setHasSeenStickerIntroTooltip(this, true);
+              EventBus.getDefault().removeStickyEvent(StickerPackInstallEvent.class);
+            })
+            .show(TooltipPopup.POSITION_ABOVE);
   }
 
   @Override
@@ -2100,9 +2100,9 @@ public class ConversationActivity extends PassphraseRequiredActivity
 
     SignalExecutors.BOUNDED.execute(() -> {
       ReactionRecord oldRecord = Stream.of(messageRecord.getReactions())
-                                       .filter(record -> record.getAuthor().equals(Recipient.self().getId()))
-                                       .findFirst()
-                                       .orElse(null);
+              .filter(record -> record.getAuthor().equals(Recipient.self().getId()))
+              .findFirst()
+              .orElse(null);
 
       if (oldRecord != null && oldRecord.getEmoji().equals(emoji)) {
         MessageSender.sendReactionRemoval(context, messageRecord.getId(), messageRecord.isMms(), oldRecord);
@@ -2115,9 +2115,9 @@ public class ConversationActivity extends PassphraseRequiredActivity
   @Override
   public void onCustomReactionSelected(@NonNull MessageRecord messageRecord, boolean hasAddedCustomEmoji) {
     ReactionRecord oldRecord = Stream.of(messageRecord.getReactions())
-                                     .filter(record -> record.getAuthor().equals(Recipient.self().getId()))
-                                     .findFirst()
-                                     .orElse(null);
+            .filter(record -> record.getAuthor().equals(Recipient.self().getId()))
+            .findFirst()
+            .orElse(null);
 
     if (oldRecord != null && hasAddedCustomEmoji) {
       final Context context = getApplicationContext();
@@ -2125,14 +2125,14 @@ public class ConversationActivity extends PassphraseRequiredActivity
       reactionOverlay.hide();
 
       SignalExecutors.BOUNDED.execute(() -> MessageSender.sendReactionRemoval(context,
-                                                                              messageRecord.getId(),
-                                                                              messageRecord.isMms(),
-                                                                              oldRecord));
+              messageRecord.getId(),
+              messageRecord.isMms(),
+              oldRecord));
     } else {
       reactionOverlay.hideAllButMask();
 
       ReactWithAnyEmojiBottomSheetDialogFragment.createForMessageRecord(messageRecord, reactWithAnyEmojiStartPage)
-                                                .show(getSupportFragmentManager(), "BOTTOM");
+              .show(getSupportFragmentManager(), "BOTTOM");
     }
   }
 
@@ -2205,9 +2205,9 @@ public class ConversationActivity extends PassphraseRequiredActivity
 
     if (!inputPanel.isStickerMode()) {
       TooltipPopup.forTarget(inputPanel.getMediaKeyboardToggleAnchorView())
-                  .setText(R.string.ConversationActivity_sticker_pack_installed)
-                  .setIconGlideModel(event.getIconGlideModel())
-                  .show(TooltipPopup.POSITION_ABOVE);
+              .setText(R.string.ConversationActivity_sticker_pack_installed)
+              .setIconGlideModel(event.getIconGlideModel())
+              .show(TooltipPopup.POSITION_ABOVE);
     }
   }
 
@@ -2221,8 +2221,8 @@ public class ConversationActivity extends PassphraseRequiredActivity
     };
 
     registerReceiver(securityUpdateReceiver,
-                     new IntentFilter(SecurityEvent.SECURITY_UPDATE_EVENT),
-                     KeyCachingService.KEY_PERMISSION, null);
+            new IntentFilter(SecurityEvent.SECURITY_UPDATE_EVENT),
+            KeyCachingService.KEY_PERMISSION, null);
   }
 
   //////// Helper Methods
@@ -2346,8 +2346,8 @@ public class ConversationActivity extends PassphraseRequiredActivity
 
           draftDatabase.insertDrafts(threadId, drafts);
           threadDatabase.updateSnippet(threadId, drafts.getSnippet(ConversationActivity.this),
-                                       drafts.getUriSnippet(),
-                                       System.currentTimeMillis(), Types.BASE_DRAFT_TYPE, true);
+                  drafts.getUriSnippet(),
+                  System.currentTimeMillis(), Types.BASE_DRAFT_TYPE, true);
         } else if (threadId > 0) {
           threadDatabase.update(threadId, false);
         }
@@ -2399,10 +2399,10 @@ public class ConversationActivity extends PassphraseRequiredActivity
 
     if (characterState.charactersRemaining <= 15 || characterState.messagesSpent > 1) {
       charactersLeft.setText(String.format(dynamicLanguage.getCurrentLocale(),
-                                           "%d/%d (%d)",
-                                           characterState.charactersRemaining,
-                                           characterState.maxTotalMessageSize,
-                                           characterState.messagesSpent));
+              "%d/%d (%d)",
+              characterState.charactersRemaining,
+              characterState.maxTotalMessageSize,
+              characterState.messagesSpent));
       charactersLeft.setVisibility(View.VISIBLE);
     } else {
       charactersLeft.setVisibility(View.GONE);
@@ -2420,8 +2420,8 @@ public class ConversationActivity extends PassphraseRequiredActivity
         int               index        = keyboardMode == MediaKeyboardMode.STICKER ? 1 : 0;
 
         mediaKeyboard.setProviders(index,
-                                   new EmojiKeyboardProvider(this, inputPanel),
-                                   new StickerKeyboardProvider(this, this));
+                new EmojiKeyboardProvider(this, inputPanel),
+                new StickerKeyboardProvider(this, this));
       }
     } else if (!isSystemEmojiPreferred) {
       mediaKeyboard.setProviders(0, new EmojiKeyboardProvider(this, inputPanel));
@@ -2486,8 +2486,8 @@ public class ConversationActivity extends PassphraseRequiredActivity
 
   private MediaConstraints getCurrentMediaConstraints() {
     return sendButton.getSelectedTransport().getType() == Type.TEXTSECURE
-           ? MediaConstraints.getPushMediaConstraints()
-           : MediaConstraints.getMmsMediaConstraints(sendButton.getSelectedTransport().getSimSubscriptionId().or(-1));
+            ? MediaConstraints.getPushMediaConstraints()
+            : MediaConstraints.getMmsMediaConstraints(sendButton.getSelectedTransport().getSimSubscriptionId().or(-1));
   }
 
   private void markLastSeen() {
@@ -2543,12 +2543,12 @@ public class ConversationActivity extends PassphraseRequiredActivity
       boolean         initiating     = threadId == -1;
       boolean         needsSplit     = !transport.isSms() && message.length() > transport.calculateCharacters(message).maxPrimaryMessageSize;
       boolean         isMediaMessage = attachmentManager.isAttachmentPresent() ||
-                                       recipient.isGroup()                     ||
-                                       recipient.getEmail().isPresent()        ||
-                                       inputPanel.getQuote().isPresent()       ||
-                                       composeText.hasMentions()               ||
-                                       linkPreviewViewModel.hasLinkPreview()   ||
-                                       needsSplit;
+              recipient.isGroup()                     ||
+              recipient.getEmail().isPresent()        ||
+              inputPanel.getQuote().isPresent()       ||
+              composeText.hasMentions()               ||
+              linkPreviewViewModel.hasLinkPreview()   ||
+              needsSplit;
 
       Log.i(TAG, "isManual Selection: " + sendButton.isManualSelection());
       Log.i(TAG, "forceSms: " + forceSms);
@@ -2564,12 +2564,12 @@ public class ConversationActivity extends PassphraseRequiredActivity
       }
     } catch (RecipientFormattingException ex) {
       Toast.makeText(ConversationActivity.this,
-                     R.string.ConversationActivity_recipient_is_not_a_valid_sms_or_email_address_exclamation,
-                     Toast.LENGTH_LONG).show();
+              R.string.ConversationActivity_recipient_is_not_a_valid_sms_or_email_address_exclamation,
+              Toast.LENGTH_LONG).show();
       Log.w(TAG, ex);
     } catch (InvalidMessageException ex) {
       Toast.makeText(ConversationActivity.this, R.string.ConversationActivity_message_is_empty_exclamation,
-                     Toast.LENGTH_SHORT).show();
+              Toast.LENGTH_SHORT).show();
       Log.w(TAG, ex);
     }
   }
@@ -2600,21 +2600,21 @@ public class ConversationActivity extends PassphraseRequiredActivity
   }
 
   private void sendMediaMessage(final boolean forceSms, final long expiresIn, final boolean viewOnce, final int subscriptionId, final boolean initiating)
-      throws InvalidMessageException
+          throws InvalidMessageException
   {
     Log.i(TAG, "Sending media message...");
     sendMediaMessage(forceSms,
-                     getMessage(),
-                     attachmentManager.buildSlideDeck(),
-                     inputPanel.getQuote().orNull(),
-                     Collections.emptyList(),
-                     linkPreviewViewModel.getActiveLinkPreviews(),
-                     composeText.getMentions(),
-                     expiresIn,
-                     viewOnce,
-                     subscriptionId,
-                     initiating,
-                     true);
+            getMessage(),
+            attachmentManager.buildSlideDeck(),
+            inputPanel.getQuote().orNull(),
+            Collections.emptyList(),
+            linkPreviewViewModel.getActiveLinkPreviews(),
+            composeText.getMentions(),
+            expiresIn,
+            viewOnce,
+            subscriptionId,
+            initiating,
+            true);
   }
 
   private ListenableFuture<Void> sendMediaMessage(final boolean forceSms,
@@ -2659,33 +2659,33 @@ public class ConversationActivity extends PassphraseRequiredActivity
     }
 
     Permissions.with(this)
-               .request(Manifest.permission.SEND_SMS, Manifest.permission.READ_SMS)
-               .ifNecessary(!isSecureText || forceSms)
-               .withPermanentDenialDialog(getString(R.string.ConversationActivity_signal_needs_sms_permission_in_order_to_send_an_sms))
-               .onAllGranted(() -> {
-                 if (clearComposeBox) {
-                   inputPanel.clearQuote();
-                   attachmentManager.clear(glideRequests, false);
-                   silentlySetComposeText("");
-                 }
+            .request(Manifest.permission.SEND_SMS, Manifest.permission.READ_SMS)
+            .ifNecessary(!isSecureText || forceSms)
+            .withPermanentDenialDialog(getString(R.string.ConversationActivity_signal_needs_sms_permission_in_order_to_send_an_sms))
+            .onAllGranted(() -> {
+              if (clearComposeBox) {
+                inputPanel.clearQuote();
+                attachmentManager.clear(glideRequests, false);
+                silentlySetComposeText("");
+              }
 
-                 final long id = fragment.stageOutgoingMessage(outgoingMessage);
+              final long id = fragment.stageOutgoingMessage(outgoingMessage);
 
-                 SimpleTask.run(() -> {
-                   return MessageSender.send(context, outgoingMessage, threadId, forceSms, () -> fragment.releaseOutgoingMessage(id));
-                 }, result -> {
-                   sendComplete(result);
-                   future.set(null);
-                 });
-               })
-               .onAnyDenied(() -> future.set(null))
-               .execute();
+              SimpleTask.run(() -> {
+                return MessageSender.send(context, outgoingMessage, threadId, forceSms, () -> fragment.releaseOutgoingMessage(id));
+              }, result -> {
+                sendComplete(result);
+                future.set(null);
+              });
+            })
+            .onAnyDenied(() -> future.set(null))
+            .execute();
 
     return future;
   }
 
   private void sendTextMessage(final boolean forceSms, final long expiresIn, final int subscriptionId, final boolean initiating)
-      throws InvalidMessageException
+          throws InvalidMessageException
   {
     if (!isDefaultSms && (!isSecureText || forceSms)) {
       showDefaultSmsPrompt();
@@ -2705,35 +2705,35 @@ public class ConversationActivity extends PassphraseRequiredActivity
     }
 
     Permissions.with(this)
-               .request(Manifest.permission.SEND_SMS)
-               .ifNecessary(forceSms || !isSecureText)
-               .withPermanentDenialDialog(getString(R.string.ConversationActivity_signal_needs_sms_permission_in_order_to_send_an_sms))
-               .onAllGranted(() -> {
-                 silentlySetComposeText("");
-                 final long id = fragment.stageOutgoingMessage(message);
+            .request(Manifest.permission.SEND_SMS)
+            .ifNecessary(forceSms || !isSecureText)
+            .withPermanentDenialDialog(getString(R.string.ConversationActivity_signal_needs_sms_permission_in_order_to_send_an_sms))
+            .onAllGranted(() -> {
+              silentlySetComposeText("");
+              final long id = fragment.stageOutgoingMessage(message);
 
-                 new AsyncTask<OutgoingTextMessage, Void, Long>() {
-                   @Override
-                   protected Long doInBackground(OutgoingTextMessage... messages) {
-                     return MessageSender.send(context, messages[0], threadId, forceSms, () -> fragment.releaseOutgoingMessage(id));
-                   }
+              new AsyncTask<OutgoingTextMessage, Void, Long>() {
+                @Override
+                protected Long doInBackground(OutgoingTextMessage... messages) {
+                  return MessageSender.send(context, messages[0], threadId, forceSms, () -> fragment.releaseOutgoingMessage(id));
+                }
 
-                   @Override
-                   protected void onPostExecute(Long result) {
-                     sendComplete(result);
-                   }
-                 }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, message);
+                @Override
+                protected void onPostExecute(Long result) {
+                  sendComplete(result);
+                }
+              }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, message);
 
-               })
-               .execute();
+            })
+            .execute();
   }
 
   private void showDefaultSmsPrompt() {
     new AlertDialog.Builder(this)
-                   .setMessage(R.string.ConversationActivity_signal_cannot_sent_sms_mms_messages_because_it_is_not_your_default_sms_app)
-                   .setNegativeButton(R.string.ConversationActivity_no, (dialog, which) -> dialog.dismiss())
-                   .setPositiveButton(R.string.ConversationActivity_yes, (dialog, which) -> handleMakeDefaultSms())
-                   .show();
+            .setMessage(R.string.ConversationActivity_signal_cannot_sent_sms_mms_messages_because_it_is_not_your_default_sms_app)
+            .setNegativeButton(R.string.ConversationActivity_no, (dialog, which) -> dialog.dismiss())
+            .setPositiveButton(R.string.ConversationActivity_yes, (dialog, which) -> handleMakeDefaultSms())
+            .show();
   }
 
   private void updateToggleButtonState() {
@@ -2789,11 +2789,11 @@ public class ConversationActivity extends PassphraseRequiredActivity
   @Override
   public void onRecorderPermissionRequired() {
     Permissions.with(this)
-               .request(Manifest.permission.RECORD_AUDIO)
-               .ifNecessary()
-               .withRationaleDialog(getString(R.string.ConversationActivity_to_send_audio_messages_allow_signal_access_to_your_microphone), R.drawable.ic_mic_solid_24)
-               .withPermanentDenialDialog(getString(R.string.ConversationActivity_signal_requires_the_microphone_permission_in_order_to_send_audio_messages))
-               .execute();
+            .request(Manifest.permission.RECORD_AUDIO)
+            .ifNecessary()
+            .withRationaleDialog(getString(R.string.ConversationActivity_to_send_audio_messages_allow_signal_access_to_your_microphone), R.drawable.ic_mic_solid_24)
+            .withPermanentDenialDialog(getString(R.string.ConversationActivity_signal_requires_the_microphone_permission_in_order_to_send_audio_messages))
+            .execute();
   }
 
   @Override
@@ -2832,17 +2832,17 @@ public class ConversationActivity extends PassphraseRequiredActivity
         slideDeck.addSlide(audioSlide);
 
         ListenableFuture<Void> sendResult = sendMediaMessage(forceSms,
-                                                             "",
-                                                             slideDeck,
-                                                             inputPanel.getQuote().orNull(),
-                                                             Collections.emptyList(),
-                                                             Collections.emptyList(),
-                                                             composeText.getMentions(),
-                                                             expiresIn,
-                                                             false,
-                                                             subscriptionId,
-                                                             initiating,
-                                                             true);
+                "",
+                slideDeck,
+                inputPanel.getQuote().orNull(),
+                Collections.emptyList(),
+                Collections.emptyList(),
+                composeText.getMentions(),
+                expiresIn,
+                false,
+                subscriptionId,
+                initiating,
+                true);
 
         sendResult.addListener(new AssertedSuccessListener<Void>() {
           @Override
@@ -2922,8 +2922,8 @@ public class ConversationActivity extends PassphraseRequiredActivity
   public void onMediaSelected(@NonNull Uri uri, String contentType) {
     if (MediaUtil.isGif(contentType) || MediaUtil.isImageType(contentType)) {
       SimpleTask.run(getLifecycle(),
-                     () -> getKeyboardImageDetails(uri),
-                     details -> sendKeyboardImage(uri, contentType, details));
+              () -> getKeyboardImageDetails(uri),
+              details -> sendKeyboardImage(uri, contentType, details));
     } else if (MediaUtil.isVideoType(contentType)) {
       setMedia(uri, MediaType.VIDEO);
     } else if (MediaUtil.isAudioType(contentType)) {
@@ -2951,7 +2951,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
     sendSticker(new StickerLocator(stickerRecord.getPackId(), stickerRecord.getPackKey(), stickerRecord.getStickerId(), stickerRecord.getEmoji()), stickerRecord.getContentType(), stickerRecord.getUri(), stickerRecord.getSize(), clearCompose);
 
     SignalExecutors.BOUNDED.execute(() ->
-     DatabaseFactory.getStickerDatabase(getApplicationContext())
+            DatabaseFactory.getStickerDatabase(getApplicationContext())
                     .updateStickerLastUsedTime(stickerRecord.getRowId(), System.currentTimeMillis())
     );
   }
@@ -2993,17 +2993,17 @@ public class ConversationActivity extends PassphraseRequiredActivity
     @Override
     public void onClick(View v) {
       Permissions.with(ConversationActivity.this)
-                 .request(Manifest.permission.CAMERA)
-                 .ifNecessary()
-                 .withRationaleDialog(getString(R.string.ConversationActivity_to_capture_photos_and_video_allow_signal_access_to_the_camera), R.drawable.ic_camera_24)
-                 .withPermanentDenialDialog(getString(R.string.ConversationActivity_signal_needs_the_camera_permission_to_take_photos_or_video))
-                 .onAllGranted(() -> {
-                   composeText.clearFocus();
-                   startActivityForResult(MediaSendActivity.buildCameraIntent(ConversationActivity.this, recipient.get(), sendButton.getSelectedTransport()), MEDIA_SENDER);
-                   overridePendingTransition(R.anim.camera_slide_from_bottom, R.anim.stationary);
-                 })
-                 .onAnyDenied(() -> Toast.makeText(ConversationActivity.this, R.string.ConversationActivity_signal_needs_camera_permissions_to_take_photos_or_video, Toast.LENGTH_LONG).show())
-                 .execute();
+              .request(Manifest.permission.CAMERA)
+              .ifNecessary()
+              .withRationaleDialog(getString(R.string.ConversationActivity_to_capture_photos_and_video_allow_signal_access_to_the_camera), R.drawable.ic_camera_24)
+              .withPermanentDenialDialog(getString(R.string.ConversationActivity_signal_needs_the_camera_permission_to_take_photos_or_video))
+              .onAllGranted(() -> {
+                composeText.clearFocus();
+                startActivityForResult(MediaSendActivity.buildCameraIntent(ConversationActivity.this, recipient.get(), sendButton.getSelectedTransport()), MEDIA_SENDER);
+                overridePendingTransition(R.anim.camera_slide_from_bottom, R.anim.stationary);
+              })
+              .onAnyDenied(() -> Toast.makeText(ConversationActivity.this, R.string.ConversationActivity_signal_needs_camera_permissions_to_take_photos_or_video, Toast.LENGTH_LONG).show())
+              .execute();
     }
   }
 
@@ -3151,8 +3151,8 @@ public class ConversationActivity extends PassphraseRequiredActivity
         reviewBanner.get().setVisibility(View.VISIBLE);
 
         CharSequence message = new SpannableStringBuilder().append(SpanUtil.bold(getString(R.string.ConversationFragment__review_requests_carefully)))
-                                                           .append(" ")
-                                                           .append(getString(R.string.ConversationFragment__signal_found_another_contact_with_the_same_name));
+                .append(" ")
+                .append(getString(R.string.ConversationFragment__signal_found_another_contact_with_the_same_name));
 
         reviewBanner.get().setBannerMessage(message);
 
@@ -3195,7 +3195,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
     }
 
     ReviewCardDialogFragment.createForReviewMembers(groupId)
-                            .show(getSupportFragmentManager(), null);
+            .show(getSupportFragmentManager(), null);
   }
 
   private void handleReviewRequest(@NonNull RecipientId recipientId) {
@@ -3204,7 +3204,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
     }
 
     ReviewCardDialogFragment.createForReviewRequest(recipientId)
-                            .show(getSupportFragmentManager(), null);
+            .show(getSupportFragmentManager(), null);
   }
 
   private void showGroupChangeErrorToast(@NonNull GroupChangeFailureReason e) {
@@ -3231,10 +3231,10 @@ public class ConversationActivity extends PassphraseRequiredActivity
   public void onMessageWithErrorClicked(@NonNull MessageRecord messageRecord) {
     if (messageRecord.hasFailedWithNetworkFailures()) {
       new AlertDialog.Builder(this)
-                     .setMessage(R.string.conversation_activity__message_could_not_be_sent)
-                     .setNegativeButton(android.R.string.cancel, null)
-                     .setPositiveButton(R.string.conversation_activity__send, (dialog, which) -> MessageSender.resend(this, messageRecord))
-                     .show();
+              .setMessage(R.string.conversation_activity__message_could_not_be_sent)
+              .setNegativeButton(android.R.string.cancel, null)
+              .setPositiveButton(R.string.conversation_activity__send, (dialog, which) -> MessageSender.resend(this, messageRecord))
+              .show();
     } else if (messageRecord.isIdentityMismatchFailure()) {
       SafetyNumberChangeDialog.show(this, messageRecord);
     } else {
@@ -3254,14 +3254,14 @@ public class ConversationActivity extends PassphraseRequiredActivity
     }
 
     SimpleTask.run(() -> {
-          //noinspection CodeBlock2Expr
-          return DatabaseFactory.getMmsSmsDatabase(this)
-                                .checkMessageExists(reactionOverlay.getMessageRecord());
-        }, messageExists -> {
-          if (!messageExists) {
-            reactionOverlay.hide();
-          }
-        });
+      //noinspection CodeBlock2Expr
+      return DatabaseFactory.getMmsSmsDatabase(this)
+              .checkMessageExists(reactionOverlay.getMessageRecord());
+    }, messageExists -> {
+      if (!messageExists) {
+        reactionOverlay.hide();
+      }
+    });
   }
 
   @Override
@@ -3292,10 +3292,10 @@ public class ConversationActivity extends PassphraseRequiredActivity
       }
 
       inputPanel.setQuote(GlideApp.with(this),
-                          messageRecord.getDateSent(),
-                          author,
-                          body,
-                          slideDeck);
+              messageRecord.getDateSent(),
+              author,
+              body,
+              slideDeck);
 
     } else if (messageRecord.isMms() && !((MmsMessageRecord) messageRecord).getLinkPreviews().isEmpty()) {
       LinkPreview linkPreview = ((MmsMessageRecord) messageRecord).getLinkPreviews().get(0);
@@ -3306,10 +3306,10 @@ public class ConversationActivity extends PassphraseRequiredActivity
       }
 
       inputPanel.setQuote(GlideApp.with(this),
-                          messageRecord.getDateSent(),
-                          author,
-                          conversationMessage.getDisplayBody(this),
-                          slideDeck);
+              messageRecord.getDateSent(),
+              author,
+              conversationMessage.getDisplayBody(this),
+              slideDeck);
     } else {
       SlideDeck slideDeck = messageRecord.isMms() ? ((MmsMessageRecord) messageRecord).getSlideDeck() : new SlideDeck();
 
@@ -3320,10 +3320,10 @@ public class ConversationActivity extends PassphraseRequiredActivity
       }
 
       inputPanel.setQuote(GlideApp.with(this),
-                          messageRecord.getDateSent(),
-                          author,
-                          conversationMessage.getDisplayBody(this),
-                          slideDeck);
+              messageRecord.getDateSent(),
+              author,
+              conversationMessage.getDisplayBody(this),
+              slideDeck);
     }
 
     inputPanel.clickOnComposeInput();
@@ -3367,7 +3367,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
     }
 
     AlertDialog.Builder builder = new AlertDialog.Builder(this)
-                                                 .setNeutralButton(R.string.ConversationActivity_cancel, (d, w) -> d.dismiss());
+            .setNeutralButton(R.string.ConversationActivity_cancel, (d, w) -> d.dismiss());
 
     if (recipient.isGroup() && recipient.isBlocked()) {
       builder.setTitle(R.string.ConversationActivity_delete_conversation);
@@ -3408,8 +3408,8 @@ public class ConversationActivity extends PassphraseRequiredActivity
 
   private void presentMessageRequestDisplayState(@NonNull MessageRequestViewModel.DisplayState displayState) {
     if ((getIntent().hasExtra(TEXT_EXTRA) && !Util.isEmpty(getIntent().getStringExtra(TEXT_EXTRA))) ||
-         getIntent().hasExtra(MEDIA_EXTRA)                                                          ||
-         getIntent().hasExtra(STICKER_EXTRA))
+            getIntent().hasExtra(MEDIA_EXTRA)                                                          ||
+            getIntent().hasExtra(STICKER_EXTRA))
     {
       Log.d(TAG, "[presentMessageRequestDisplayState] Have extra, so ignoring provided state.");
       messageRequestBottomView.setVisibility(View.GONE);
@@ -3441,11 +3441,11 @@ public class ConversationActivity extends PassphraseRequiredActivity
   private @Nullable KeyboardImageDetails getKeyboardImageDetails(@NonNull Uri uri) {
     try {
       Bitmap bitmap = glideRequests.asBitmap()
-                                   .load(new DecryptableStreamUriLoader.DecryptableUri(uri))
-                                   .skipMemoryCache(true)
-                                   .diskCacheStrategy(DiskCacheStrategy.NONE)
-                                   .submit()
-                                   .get(1000, TimeUnit.MILLISECONDS);
+              .load(new DecryptableStreamUriLoader.DecryptableUri(uri))
+              .skipMemoryCache(true)
+              .diskCacheStrategy(DiskCacheStrategy.NONE)
+              .submit()
+              .get(1000, TimeUnit.MILLISECONDS);
       int topLeft = bitmap.getPixel(0, 0);
       return new KeyboardImageDetails(bitmap.getWidth(), bitmap.getHeight(), Color.alpha(topLeft) < 255);
     } catch (InterruptedException | ExecutionException | TimeoutException e) {
@@ -3473,17 +3473,17 @@ public class ConversationActivity extends PassphraseRequiredActivity
     }
 
     sendMediaMessage(isSmsForced(),
-                     "",
-                     slideDeck,
-                     null,
-                     Collections.emptyList(),
-                     Collections.emptyList(),
-                     composeText.getMentions(),
-                     expiresIn,
-                     false,
-                     subscriptionId,
-                     initiating,
-                     false);
+            "",
+            slideDeck,
+            null,
+            Collections.emptyList(),
+            Collections.emptyList(),
+            composeText.getMentions(),
+            expiresIn,
+            false,
+            subscriptionId,
+            initiating,
+            false);
   }
 
   private class UnverifiedDismissedListener implements UnverifiedBannerView.DismissListener {
@@ -3497,8 +3497,8 @@ public class ConversationActivity extends PassphraseRequiredActivity
           synchronized (SESSION_LOCK) {
             for (IdentityRecord identityRecord : unverifiedIdentities) {
               identityDatabase.setVerified(identityRecord.getRecipientId(),
-                                           identityRecord.getIdentityKey(),
-                                           VerifiedStatus.DEFAULT);
+                      identityRecord.getIdentityKey(),
+                      VerifiedStatus.DEFAULT);
             }
           }
 

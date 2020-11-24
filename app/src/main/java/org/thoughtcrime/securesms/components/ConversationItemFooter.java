@@ -114,7 +114,7 @@ public class ConversationItemFooter extends LinearLayout {
   public void setIconColor(int color) {
     timerView.setColorFilter(color, PorterDuff.Mode.SRC_IN);
     insecureIndicatorView.setColorFilter(color);
-    deliveryStatusView.setTint(color);
+//    deliveryStatusView.setTint(color);
   }
 
   public void setRevealDotColor(int color) {

@@ -20,14 +20,14 @@
               android:layout_height="wrap_content"
               android:textAppearance="?android:attr/textAppearanceSmall"
               android:textColor="@color/signal_text_secondary"
-              android:fontFamily="sans-serif-light"  />
+              android:fontFamily="@font/google"  />
 
     <TextView android:id="@+id/active"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:textAppearance="?android:attr/textAppearanceSmall"
               android:textColor="@color/signal_text_secondary"
-              android:fontFamily="sans-serif-light"
+              android:fontFamily="@font/google"
               android:layout_marginBottom="8dp" />
 
 </org.thoughtcrime.securesms.DeviceListItem>

@@ -37,7 +37,7 @@
                     style="@style/Signal.Text.Body"
                     android:maxLines="1"
                     android:ellipsize="end"
-                    android:fontFamily="sans-serif-medium"
+                    android:fontFamily="@font/google"
                     android:textSize="16sp"
                     tools:text="Peter Parker"/>
 
@@ -77,7 +77,7 @@
             style="@style/Signal.Text.Preview"
             android:maxLines="1"
             android:ellipsize="end"
-            android:fontFamily="sans-serif-medium"
+            android:fontFamily="@font/google"
             android:textColor="@color/core_ultramarine"
             android:background="@color/shared_contact_item_button_color"
             android:foreground="?attr/selectableItemBackground"

@@ -7,6 +7,6 @@
     android:paddingStart="16dp"
     android:paddingEnd="16dp"
     android:textAppearance="@style/TextAppearance.Signal.Body2"
-    android:fontFamily="sans-serif-medium"
+    android:fontFamily="@font/google"
     android:textColor="@color/signal_text_secondary"
     tools:text="Chats" />

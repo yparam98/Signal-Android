@@ -97,7 +97,7 @@
                     android:paddingStart="4sp"
                     android:paddingEnd="4sp"
                     style="@style/Signal.Text.Preview"
-                    android:fontFamily="sans-serif-regular"
+                    android:fontFamily="@font/google"
                     android:textColor="@color/conversation_item_received_text_primary_color"
                     android:textStyle="italic"
                     android:maxLines="1"

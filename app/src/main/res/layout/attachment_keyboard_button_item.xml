@@ -26,7 +26,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       style="@style/Signal.Text.Preview"
-      android:fontFamily="sans-serif-medium"
+      android:fontFamily="@font/google"
       android:gravity="center"
       android:textColor="@color/attachment_keyboard_button_foreground"
       app:layout_constraintTop_toBottomOf="@id/attachment_button_image"

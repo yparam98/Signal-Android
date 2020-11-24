@@ -23,7 +23,8 @@
         android:transitionName="contact_photo"
         app:inverted="true"
         app:fallbackImageSize="small"
-        tools:src="@drawable/ic_contact_picture" />
+        tools:src="@drawable/ic_contact_picture"
+        android:visibility="visible"/>
 
     <LinearLayout
         android:id="@+id/content"
@@ -40,13 +41,15 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|start"
             android:drawablePadding="3dp"
+            android:drawableTint="@color/transparent_white_90"
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:maxLines="1"
+            android:textSize="18sp"
             android:transitionName="recipient_name"
-            android:drawableTint="@color/transparent_white_90"
             tools:ignore="UnusedAttribute"
-            tools:text="J. Jonah Jameson" />
+            tools:text="J. Jonah Jameson"
+            android:fontFamily="@font/google"/>
 
         <LinearLayout
             android:id="@+id/subtitle_container"
