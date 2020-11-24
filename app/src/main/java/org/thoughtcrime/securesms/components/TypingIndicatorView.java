@@ -1,18 +1,37 @@
 package org.thoughtcrime.securesms.components;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
-import androidx.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
+
 import org.thoughtcrime.securesms.R;
 
+import java.sql.Time;
+
 public class TypingIndicatorView extends LinearLayout {
+
+  class TypingDot
+  {
+    public View dot;
+    public int id;
+    public boolean up;
+
+    TypingDot(int id)
+    {
+      this.id = id;
+    }
+  };
 
   private static final long DURATION   = 300;
   private static final long PRE_DELAY  = 500;
@@ -25,9 +44,9 @@ public class TypingIndicatorView extends LinearLayout {
   private boolean isActive;
   private long    startTime;
 
-  private View dot1;
-  private View dot2;
-  private View dot3;
+  private TypingDot dot1 = new TypingDot(1);
+  private TypingDot dot2 = new TypingDot(2);
+  private TypingDot dot3 = new TypingDot(3);
 
   public TypingIndicatorView(Context context) {
     super(context);
@@ -40,22 +59,41 @@ public class TypingIndicatorView extends LinearLayout {
   }
 
   private void initialize(@Nullable AttributeSet attrs) {
+    int nightModeFlag = getContext().getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+    int tint = 0;
+
     inflate(getContext(), R.layout.typing_indicator_view, this);
 
     setWillNotDraw(false);
 
-    dot1 = findViewById(R.id.typing_dot1);
-    dot2 = findViewById(R.id.typing_dot2);
-    dot3 = findViewById(R.id.typing_dot3);
+    dot1.dot = findViewById(R.id.typing_dot1);
+    dot1.up = false;
+
+    dot2.dot = findViewById(R.id.typing_dot2);
+    dot2.up = false;
+
+    dot3.dot = findViewById(R.id.typing_dot3);
+    dot3.up = false;
 
     if (attrs != null) {
       TypedArray typedArray = getContext().getTheme().obtainStyledAttributes(attrs, R.styleable.TypingIndicatorView, 0, 0);
-      int        tint       = typedArray.getColor(R.styleable.TypingIndicatorView_typingIndicator_tint, Color.WHITE);
+      switch (nightModeFlag)
+      {
+        case Configuration.UI_MODE_NIGHT_YES:
+          tint = typedArray.getColor(R.styleable.TypingIndicatorView_typingIndicator_tint, Color.WHITE);
+          break;
+        case Configuration.UI_MODE_NIGHT_NO:
+          tint = typedArray.getColor(R.styleable.TypingIndicatorView_typingIndicator_tint, Color.BLACK);
+          break;
+      }
+
       typedArray.recycle();
 
-      dot1.getBackground().setColorFilter(tint, PorterDuff.Mode.MULTIPLY);
-      dot2.getBackground().setColorFilter(tint, PorterDuff.Mode.MULTIPLY);
-      dot3.getBackground().setColorFilter(tint, PorterDuff.Mode.MULTIPLY);
+      // make typing dots color the color of the conversation
+
+      dot1.dot.getBackground().setColorFilter(tint, PorterDuff.Mode.MULTIPLY);
+      dot2.dot.getBackground().setColorFilter(tint, PorterDuff.Mode.MULTIPLY);
+      dot3.dot.getBackground().setColorFilter(tint, PorterDuff.Mode.MULTIPLY);
     }
   }
 
@@ -76,23 +114,67 @@ public class TypingIndicatorView extends LinearLayout {
     postInvalidate();
   }
 
-  private void render(View dot, long timeInCycle, long start) {
+  private void render(TypingDot dot, long timeInCycle, long start) {
     long end  = start + DOT_DURATION;
     long peak = start + (DOT_DURATION / 2);
 
-    if (timeInCycle < start || timeInCycle > end) {
+    if (timeInCycle < start || timeInCycle > end)
+    {
       renderDefault(dot);
-    } else if (timeInCycle < peak) {
-      renderFadeIn(dot, timeInCycle, start);
-    } else {
-      renderFadeOut(dot, timeInCycle, peak);
+    }
+    else if (timeInCycle < peak)
+    {
+      if (!dot.up)
+      {
+        renderBounceUp(dot, timeInCycle);
+      }
+    }
+    else
+    {
+      if (dot.up)
+      {
+        renderBounceDown(dot, timeInCycle);
+      }
     }
   }
 
-  private void renderDefault(View dot) {
-    dot.setAlpha(MIN_ALPHA);
-    dot.setScaleX(MIN_SCALE);
-    dot.setScaleY(MIN_SCALE);
+  private void renderBounceUp(TypingDot dot, long timeInCycle) { // added by KingCurry9812
+    Log.d("yparam", dot.id+" up");
+
+    ObjectAnimator move_up = ObjectAnimator.ofFloat(dot.dot, "translationY", 15f);
+    move_up.setDuration(500);
+    move_up.start();
+
+    dot.up = true;
+  }
+
+  private void renderBounceDown(TypingDot dot, long timeInCycle) { // added by KingCurry9812
+    Log.d("yparam", dot.id+" down");
+
+    ObjectAnimator move_down = ObjectAnimator.ofFloat(dot.dot, "translationY", -15f);
+    move_down.setDuration(500);
+    move_down.start();
+
+    dot.up = false;
+  }
+
+  private void renderDefault(TypingDot dot) {
+    ObjectAnimator move_up = ObjectAnimator.ofFloat(dot.dot, "translationY", 100f);
+    move_up.setDuration(500);
+    move_up.start();
+
+//    if (!dot.up)
+//    {
+//      ObjectAnimator move_up = ObjectAnimator.ofFloat(dot.dot, "translationY", 100f);
+//      move_up.setDuration(500);
+//      move_up.start();
+//    }
+//    else
+//    {
+//      ObjectAnimator move_down = ObjectAnimator.ofFloat(dot.dot, "translationY", -100f);
+//      move_down.setDuration(500);
+//      move_down.start();
+//    }
   }
 
   private void renderFadeIn(View dot, long timeInCycle, long fadeInStart) {
